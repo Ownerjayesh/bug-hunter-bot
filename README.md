@@ -1,4 +1,4 @@
-# BB Bug Hunter - Comprehensive Game Logic Documentation
+# [BB Bug Hunter](https://t.me/bb_bug_hunterBot) - Comprehensive Game Logic Documentation
 
 ## Overview
 **BB Bug Hunter** is an interactive and fast-paced game where players must kill bugs before they overrun the area. The game combines dynamic gameplay mechanics with modern web technologies to deliver a fun and engaging experience. It features bug spawning, a unique "Zeher" spray mechanic, customizable settings, and ad integration to support the developer.
