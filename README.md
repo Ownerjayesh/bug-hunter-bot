@@ -129,7 +129,8 @@ bugSpawnInterval = setInterval(() => {
     updateBugCount();
   }
 }, bugSpawnIntervalTime);
-
+```
+---
 
 # Setup
 just copy the bot and replace your ad id on game.html file, get ad id from monetag.com.
