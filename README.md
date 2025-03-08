@@ -1,131 +1,84 @@
-# BB Bug Hunter - Comprehensive Game Logic Documentation
+# bb_bug_hunterBot - chat bot
+It is repository for chat bot: [@bb_bug_hunterBot](https://t.me/bb_bug_hunterBot)
 
-## Overview
-**BB Bug Hunter** is an interactive and fast-paced game where players must kill bugs before they overrun the area. The game combines dynamic gameplay mechanics with modern web technologies to deliver a fun and engaging experience. It features bug spawning, a unique "Zeher" spray mechanic, customizable settings, and ad integration to support the developer.
+## What it is?
+This repository can be imported to [Bots.Business](https://bots.business) as a worked chat bot.
 
----
+[Bots.Business](https://bots.business) - it is probably the first CBPaaS - Chat Bot Platform as a Service.
 
-## Core Game Mechanics
+A CBPaaS is a cloud-based platform that enables developers to create chatbots without needing to build backend infrastructure.
 
-### 1. **Bug Spawning**
-- Bugs spawn randomly within the game area at regular intervals (`bugSpawnIntervalTime`).
-- Each bug is represented by an emoji (🐞, 🦗, 🐜, 🦟) and moves randomly across the screen.
-- The maximum number of alive bugs is capped at `maxBugs`. If this limit is reached, the game ends.
+## Create your own bot for Telegram from this Git repo
 
-### 2. **Killing Bugs**
-- Players can kill bugs by tapping on them.
-- When a bug is killed:
-  - The score increases by 1.
-  - The bug plays a "splat" animation and disappears.
-  - Haptic feedback is triggered (if enabled).
+How to create bot?
+1. Create bot with [@BotFather](https://telegram.me/BotFather) and take Secret Token
+2. Create bot in App and add Secret Token
+3. Add Public Key from App as [Deploy key](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys) with read access (and write access for bot exporting if you need it)
+4. Do import for this git repo
 
-### 3. **Zeher Spray Mechanic**
-- A "Zeher" bottle fills up over time (`bottleFillTime`).
-- Once fully filled, players can activate the Zeher spray:
-  - The spray creates a temporary zone (`zeherRadius`) that kills all bugs within it.
-  - The spray lasts for `zeherDuration` and then disappears.
+Now you can talk with yours new Telegram Bot
 
-### 4. **Game Over**
-- The game ends if:
-  - The number of alive bugs reaches `maxBugs`.
-  - A "Game Over" popup (using SweetAlert2) is displayed, showing the final score and high score.
+See [more](https://help.bots.business/getting-started)
 
----
+## Commands - in commands folder
+File name - it is command name (Bot it can be rewritten in command description)
 
-## Features
+Command can have: `name`, `help`, `aliases` (second names), `answer`, `keyboard`, `scnarios` (for simple logic) and other options.
 
-### 1. **Background Music**
-- Background music plays during the game.
-- Players can mute/unmute the music using the volume button.
+### Command description
+It is file header:
 
-### 2. **Haptic Feedback**
-- Haptic feedback is triggered when a bug is killed.
-- Players can enable/disable haptic feedback using the haptic button.
+    /*CMD
+      command: /test
+      help: this is help for ccommand
+      need_reply: [ true or false here ]
+      auto_retry_time: [ time in sec ]
+      answer: it is example answer for /test command
+      keyboard: button1, button2
+      aliases: /test2, /test3
+    CMD*/
 
-### 3. **Pause and Resume**
-- Players can pause the game using the pause button.
-- When paused, an ad is displayed (using the Ads Script).
-- The game can be resumed or the background can be changed while paused.
+See [more](https://help.bots.business/commands)
 
-### 4. **Background Selection**
-- Players can change the game background from a selection of images.
-- The background selection is implemented using a modal (Materialize CSS).
+### Command body
+It is command code in JavaScript.
+Use Bot Java Script for logic in command.
 
-### 5. **Ad Integration**
-- Ads are displayed:
-  - When the game is paused.
-  - When the game ends (Game Over).
-- Ads help the developer earn money.
+For example:
+> Bot.sendMessage(2+2);
 
----
+See [more](https://help.bots.business/scenarios-and-bjs)
 
-## Libraries Used and Their Roles
 
-### 1. **Materialize CSS**
-- **Role**: Provides a responsive and modern UI framework for styling the web app.
-- **Usage**:
-  - Buttons, modals, and other UI components.
-  - Background selection modal.
+## Libraries - in libs folder
+You can store common code in the libs folder. File name - it is library name.
 
-### 2. **Font Awesome**
-- **Role**: Offers a collection of scalable vector icons.
-- **Usage**:
-  - Icons for buttons (e.g., play, pause, volume).
-  - Enhances the visual appeal of the UI.
+For example code in myLib.js:
 
-### 3. **SweetAlert2**
-- **Role**: A JavaScript library for creating stylish and customizable popup dialogs.
-- **Usage**:
-  - Displays the "Game Over" popup with a clean and modern design.
+    function hello(){ Bot.sendMessage("Hello from lib!") }
+    function goodbye(name){ Bot.sendMessage("Goodbye, " + name) }
 
-### 4. **Telegram WebApp SDK**
-- **Role**: Enables integration with Telegram's WebApp platform.
-- **Usage**:
-  - Cloud Storage: Saves and retrieves the high score.
-  - Haptic Feedback: Provides vibration effects when bugs are killed.
-  - Full SCreen mode.
-  - Disable vircicle sweep, making better gaming experience.
-  - Closing confirmation for mistakeenly closing.
+    publish({
+      sayHello: hello,
+      sayGoodbyeTo: goodbye
+    })
 
-### 5. **Ads Script (~whephiwums.com~ = monetag.com)**
-- **Role**: Manages advertisements within the web app.
-- **Usage**:
-  - Displays ads when the game is paused or ends.
-  - Helps monetize the game.
+then you can run in any bot's command:
 
-### 6. **Materialize JavaScript**
-- **Role**: Adds interactivity to Materialize CSS components.
-- **Usage**:
-  - Enables functionality for modals (e.g., background selection modal).
+    Libs.myLib.hello()
+    Libs.myLib.sayGoodbyeTo("Alice")
 
----
+See [more](https://help.bots.business/git/library)
 
-## Technical Details
+## Other bots example
+See other bots examples in the [github](https://github.com/bots-business?utf8=✓&tab=repositories&q=&type=public&language=javascript) or in the [Bot Store](https://bots.business/)
 
-### 1. **Variables**
-- `maxBugs`: Maximum number of alive bugs (default: 100).
-- `bugSpawnIntervalTime`: Time interval for bug spawning (default: 500ms).
-- `bottleFillTime`: Time to fill the Zeher bottle (default: 15 seconds).
-- `zeherDuration`: Duration of the Zeher spray (default: 6 seconds).
-- `zeherRadius`: Radius of the Zeher spray (default: 90px).
 
-### 2. **Game Flow**
-1. **Start Screen**: Players click "Play" to start the game.
-2. **Gameplay**:
-   - Bugs spawn and move randomly.
-   - Players kill bugs and activate the Zeher spray.
-3. **Pause**: Players can pause the game, triggering an ad.
-4. **Game Over**: If bugs overrun the area, the game ends, and a "Game Over" popup is displayed.
+## Other help
+[Help.bots.business](https://help.bots.business)
 
-### 3. **Code Snippets**
+## API
+See [API](https://api.bots.business/docs#/docs/summary)
 
-#### Bug Spawning
-```javascript
-bugSpawnInterval = setInterval(() => {
-  if (!gamePaused && aliveBugs < maxBugs) {
-    const bug = createBug();
-    bugs.push(bug);
-    aliveBugs++;
-    updateBugCount();
-  }
-}, bugSpawnIntervalTime);
+
+![](https://bots.business/images/web-logo.png)
