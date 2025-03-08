@@ -83,8 +83,11 @@
 - **Usage**:
   - Cloud Storage: Saves and retrieves the high score.
   - Haptic Feedback: Provides vibration effects when bugs are killed.
+  - Full SCreen mode.
+  - Disable vircicle sweep, making better gaming experience.
+  - Closing confirmation for mistakeenly closing.
 
-### 5. **Ads Script (whephiwums.com)**
+### 5. **Ads Script (~whephiwums.com~ = monetag.com)**
 - **Role**: Manages advertisements within the web app.
 - **Usage**:
   - Displays ads when the game is paused or ends.
